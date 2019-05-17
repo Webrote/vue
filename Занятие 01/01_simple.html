@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Vue js</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+	<style>
+		.wrapper {
+			padding: 10px 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="sample">
+				<input type="text" v-model="name">
+				<hr>
+				<h2>Hello, {{ name }}</h2>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		new Vue({
+			el: '.sample',
+			data: {
+				name: 'Denis'
+			}
+		})
+	</script>
+</body>
+</html>
