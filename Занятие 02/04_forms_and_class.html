@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Vue js</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+	<style>
+		.wrapper {
+			padding: 10px 0;
+		}
+
+		.my-info {
+			font-style: italic;
+		}
+		.my-warning {
+			font-size: 20px;
+		}
+
+		.my-danger {
+			font-weight: bolder;
+		}
+
+		.table-some {
+			color: #fff;
+			background-color: #000;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="sample">
+				<div class="alert" :class="divClassName">
+					Some text
+				</div>
+
+				<div class="form-check">
+					<label class="form-check-label">
+						<input 	type="radio" 
+								class="form-check-input"
+								value="info"
+								v-model="divClass">
+						Info
+					</label>
+				</div>
+
+				<div class="form-check">
+					<label class="form-check-label">
+						<input 	type="radio" 
+								class="form-check-input"
+								value="warning"
+								v-model="divClass">
+						Warning
+					</label>
+				</div>
+
+				<div class="form-check">
+					<label class="form-check-label">
+						<input 	type="radio" 
+								class="form-check-input"
+								value="danger"
+								v-model="divClass">
+						Danger
+					</label>
+				</div>
+
+				<hr>
+				
+				<div class="form-check" v-for="(value, name) in flags">
+					<label class="form-check-label">
+						<input 	class="form-check-input"
+								type="checkbox" 
+								v-model="flags[name]">
+						{{ name }}
+					</label>
+				</div>
+
+				<hr>
+
+				<table class="table" :class="flags">
+					<tr>
+						<td>Tilte</td>
+						<td>Some</td>
+						<td>Nz</td>
+					</tr>
+					<tr>
+						<td>Tilte</td>
+						<td>Some</td>
+						<td>Nz</td>
+					</tr>
+					<tr>
+						<td>Tilte</td>
+						<td>Some</td>
+						<td>Nz</td>
+					</tr>
+				</table>
+				
+				
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+
+		/*
+			:class="string"
+			:class="array"
+			:class="obj"
+			:class="[str, obj]"
+			:class="['alert', 'some', {a: true, b: false}]"
+
+		 */
+		new Vue({
+			el: '.sample',
+			data: {
+				divClass: 'warning',
+				flags: {
+					'table-bordered': false,
+					'table-hover': false,
+					'table-some': false,
+				}
+			},
+
+			computed: {
+				divClassName() {
+					return [
+						'alert-' + this.divClass,
+						'my-' + this.divClass
+					];
+				}
+			}
+
+		})
+	</script>
+</body>
+</html>

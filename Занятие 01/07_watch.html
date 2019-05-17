@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Vue js</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+	<style>
+		.wrapper {
+			padding: 10px 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="sample">
+				<input 	type="text" v-model="firstName">
+				<hr>
+				<input 	type="text" v-model="lastName">
+				<hr>
+				<input 	type="text" v-model="promo">
+				<hr>
+				<h2>Hello, {{ fullName }}</h2>
+
+				<hr>
+
+				<button class="btn btn-success"
+						@click="showText = !showText"
+				>Toggle text</button>
+				<h3 v-if="showText">Your sale is {{ sale }} %</h3>
+
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+
+		function getSale(code, callback) {
+			let codes = {
+				newYear: 10,
+				some:20
+			}
+
+			let sale = (codes[code] !== undefined) ? codes[code] : 0;
+
+			setTimeout(() => {
+				callback(sale);
+			},500);
+		}
+
+		new Vue({
+			el: '.sample',
+			data: {
+				firstName: '',
+				lastName: '',
+				promo: '',
+				sale: 0,
+				showText: false
+			},
+			computed: {
+				fullName() {
+					console.log('Show Name');
+					return this.firstName + ' ' + this.lastName;
+				},
+				/*sale() {
+
+					return getSale(this.promo);
+				}*/
+			},
+			watch: {
+				promo() {
+					getSale(this.promo, (sale) => {
+						this.sale = sale;
+					})
+				}
+				// firstName() {
+				// 	this.fullName = this.firstName + ' ' + this.lastName;
+				// },
+				// lastName() {
+				// 	this.fullName = this.firstName + ' ' + this.lastName;
+				// }
+			}
+		})
+	</script>
+</body>
+</html>
